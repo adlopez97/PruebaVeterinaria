@@ -1,0 +1,28 @@
+CREATE TABLE veterinarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    apellido_paterno VARCHAR(50) NOT NULL,
+    apellido_materno VARCHAR(50),
+    nombre VARCHAR(50) NOT NULL,
+    cedula_profesional VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE pacientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_paciente VARCHAR(100) NOT NULL,
+    tipo_paciente ENUM('Perro', 'Gato') NOT NULL,
+    fecha_nacimiento DATE,
+    apellido_paterno_propietario VARCHAR(50),
+    apellido_materno_propietario VARCHAR(50),
+    nombre_propietario VARCHAR(50),
+    telefono VARCHAR(20)
+);
+
+CREATE TABLE citas_medicas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_propietario VARCHAR(100) NOT NULL,
+    id_paciente INT NOT NULL,
+    id_veterinario INT NOT NULL,
+    fecha_hora DATETIME NOT NULL,
+    FOREIGN KEY (id_paciente) REFERENCES pacientes(id),
+    FOREIGN KEY (id_veterinario) REFERENCES veterinarios(id)
+);
